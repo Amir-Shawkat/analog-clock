@@ -9,6 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    width:100%;
     height: 100vh;
     background: radial-gradient(circle , #0b456b , #021c37);
 }
@@ -16,8 +17,6 @@ body {
 .clock {
     width: 500px;
     height: 500px;
-    min-width: 500px;
-    min-height: auto;
     position: relative;
     border-radius: 50%;
     display: flex;
@@ -27,16 +26,41 @@ body {
     background: radial-gradient(circle , #133e7c, #091833);
 }
 
-.clock::before{
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.clock::before, .card::after{
     content:'';
-    width: 525px;
-    height: 525px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
+    top: 50%;
+    left:50%;
+    translate: -50% -50%;
+    padding: 5px;
     position: absolute;
     /* background: linear-gradient(to right , #00d9ff , #ee00ff); */
-    background: linear-gradient(to left,#0abdc6 ,  #ea00d9, #711c91);
+    background-image: conic-gradient(from var(--angle),#0abdc6 ,  #ea00d9, #711c91 ,#0abdc6);
     box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.4);
     z-index: -1;
+    animation: 10s spin linear infinite
+}
+
+.clock::before{
+    filter: blur(2rem);
+    opacity: 0.7;
+}
+
+@keyframes spin{
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+    }
 }
 
 .number {
@@ -91,4 +115,36 @@ body {
     height: 210px;
     /* background: linear-gradient(#ee00ff ,#00d9ff , #ee00ff); */
     background: linear-gradient(to top, #711c91,#0abdc6 ,  #ea00d9, #711c91);
+}
+
+@media (max-width: 500px){
+    body{
+        height: 100vh;
+        min-width: 300px;
+    }
+    .clock{
+        width: 300px;
+        height: 300px;
+    }
+    .number{
+        font-size: 24px;
+        inset:10px;
+    }
+    .hour-hand{
+        height: 90px;
+        width: 8px;
+    }
+    .minute-hand{
+        height: 110px;
+        width: 8px;
+    }
+    .seconds-hand{
+        height: 120px;
+        width: 4px;
+    }
+    .center-dot{
+        width: 15px;
+        height: 15px;
+        border: 3px solid #0abdc6;
+    }
 }
