@@ -7,7 +7,7 @@ function getCurrentTime() {
 
     const seconds = date.getSeconds() / 60;
     const minutes = date.getMinutes() / 60;
-    const hours = date.getHours() / 12;
+    const hours = ( date.getMinutes() + (date.getHours() % 12) * 60) / 720;
 
     rotateClockHand(secondsHand , seconds);
     rotateClockHand(minuteHand , minutes);

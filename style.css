@@ -94,7 +94,7 @@ body {
     bottom: 50%;
     transform: translate(-50%) rotate(calc(var(--rotate) * 1deg));
     transform-origin: bottom;
-    border-radius: 30px;
+    border-radius: 50% 50% 0 0;
 }
 .hour-hand {
     width: 12px;
